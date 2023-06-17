@@ -8,12 +8,12 @@
 	 	private $user ="root";
 	 	private $password = "";
 
-	 	public funtion __contruct(){
+	 	public function __construct(){
 	 		try {
 	 			$db = new PDO("{$this->drive}:host={$this->host};dbname={$this->dbname}", $this->user,$this->password);
 	 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	 			return $db;
+	 			//return $db;
 
 	 			echo "conexion realizada";
 
