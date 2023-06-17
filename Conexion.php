@@ -8,7 +8,7 @@ class Conexion
 	private $user = "root"; 
 	private $password ="";
 
-	public function_construct()
+	public function __construct()
 	{
 		try
 		{
@@ -16,7 +16,7 @@ class Conexion
 
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			return $db;
+			//return $db;
 
 			echo "conexion realizada";
 
