@@ -9,7 +9,7 @@
 
 		public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad){
 
-				$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread, :Apellidoad, :Usuarioad, :Passwordad, :'Administrador', :'Activo' )");
+			$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread, :Apellidoad, :Usuarioad, :Passwordad, :Perfilad, :Estadoad )");
 
 				$statement->bindParam(":Nombread", $Nombread); 	
 				$statement->bindParam(":Apellidoad", $Apellidoad); 	
@@ -86,7 +86,7 @@
 			}else{
 
 				echo "el usuario no se puede eliminar";
-				header('Location: ../pages/eliminar.php')
+				header('Location: ../pages/eliminar.php');
 			}
 
 		}
