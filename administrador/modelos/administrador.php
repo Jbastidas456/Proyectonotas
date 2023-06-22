@@ -1,6 +1,6 @@
 <?php
 
-include_once('../../Conexion');
+include_once('../../Conexion.php');
 Class Administrador extends Conexion
 {
 	public function __construct()
@@ -8,24 +8,24 @@ Class Administrador extends Conexion
 		$this->db = parent::__construct();
 	}
 
-	publi function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Pefilad,$Estadoad)
+	public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Pefilad,$Estadoad)
 	{
-		$statement=$this->db->prepare("INSERT INTO usuarios(Nombre,Apellido,Usuario,Password,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:'Adiministrador',:'Activo')");
+		$statement=$this->db->prepare("INSERT INTO usuarios(Nombre,Apellido,Usuario,Password,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:Perfilad,:Estadoad)");
 
-		$statement->bindParam(":Nombread",$Nombread);
-		$statement->bindParam(":Apellidoad",$Apellidoad);
-		$statement->bindParam(":Usuarioad",$Usuarioad);
-		$statement->bindParam(":Passwordad",$Passwordad);
-		$statement->bindParam(":Pefilad",$Pefilad);
-		$statement->bindParam(":Estadoad",$Estadoad);
+		$statement->bindParam(':Nombread',$Nombread);
+		$statement->bindParam(':Apellidoad',$Apellidoad);
+		$statement->bindParam(':Usuarioad',$Usuarioad);
+		$statement->bindParam(':Passwordad',$Passwordad);
+		$statement->bindParam(':Pefilad',$Pefilad);
+		$statement->bindParam(':Estadoad',$Estadoad);
 
 		if ($statement->execute()) {
 			echo "usuario registrado";
-			header('location:../index.php')
+			header('location: ../pages/index.php');
 
 		}else{
 			echo "no se puede crear el registro";
-			header('location: ../pages/agregar.php')
+			header('location: ../pages/agregar.php');
 		}
 
 	}
@@ -44,7 +44,7 @@ Class Administrador extends Conexion
 
 	public function getidad($id)
 	{
-		$row=null
+		$row=null;
 		$statement=$this-->db->prepare("SELECT * FROM usuarios WHERE Perfil='Adiministrador'and ID_USUARIO=$id"); 
 		$statement->bindParam(':id',$id); 
 		$statement->execute();
