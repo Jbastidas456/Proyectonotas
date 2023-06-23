@@ -7,16 +7,19 @@
 			$this->db = parent::__construct();
 		}
 
-		public function agregarad($Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Notas){
+		public function agregarad($Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo){
 
-				$statement = $this->db->prepare("INSERT INTO usuarios(Nombredoc,Apellidodoc,Documentodoc,Correodoc,Materiadoc,Notasmate)values(:Nombredo, :Apellidodo, :Documentodo, :Correodo, :Materiado, :Notas )");
+				$statement = $this->db->prepare("INSERT INTO docentes(Nombredoc,Apellidodoc,Documentodoc,Correodoc,Materiadoc,Usuariodoc, Passworddoc,Perfil,Estadodoc)values(:Nombredo, :Apellidodo, :Documentodo, :Correodo, :Materiado, :Usuariodo, :Passworddo, :Perfildo, :Estadodo)");
 
 				$statement->bindParam(":Nombredo", $Nombredo); 	
 				$statement->bindParam(":Apellidodo", $Apellidodo); 	
 				$statement->bindParam(":Documentodo", $Documentodo); 	
 				$statement->bindParam(":Correodo", $Correodo); 	
 				$statement->bindParam(":Materiado", $Materiado); 	
-				$statement->bindParam(":Notas", $Notas);
+				$statement->bindParam(":Usuariodo", $Usuariodo);
+				$statement->bindParam(":Passworddo", $Passworddo);
+				$statement->bindParam(":Perfildo", $Perfildo);
+				$statement->bindParam(":Estadodo", $Estadodo);
 				if ($statement->execute()) {
 						echo "Docente registrado registrado";
 						header('Location:  ../pages/index.php');
@@ -30,7 +33,7 @@
 
 		public function getad(){
 			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM docentes WHERE Documentodoc='Documentodoc'");
+			$statement = $this->db->prepare("SELECT * FROM docentes WHERE Perfil='Docente'");
 			$statement->execute();
 
 			while ($resul = $statement->fetch()) {
@@ -42,7 +45,7 @@
 
 		public function getidad($Id){
 			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM docentes WHERE Documentodoc=Documentodoc AND id_docente=$Id");
+			$statement = $this->db->prepare("SELECT * FROM docentes WHERE Perfil=Docente AND id_docente=$Id");
 			$statement->bindparam(':Id',$Id);
 			$statement->execute();
 			
@@ -53,17 +56,20 @@
 			return $row;
 		}
 
-		public function updatead($Id,$Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Notas){
+		public function updatead($Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo){
 
-			$statement=$this->db->prepare("UPDATE * FROM docentes SET Nombredoc=:Nombredo,Apellidodoc=:Apellidodo,Documentodo=:Documentodoc, Correodoc=:Correodo, Materiadoc=:Materiado, Notasmate=:$Notas WHERE id_docente=$Id");
+			$statement=$this->db->prepare("UPDATE * FROM docentes SET Nombredoc=:Nombredo,Apellidodoc=:Apellidodo,Documentodo=:Documentodoc, Correodoc=:Correodo, Materiadoc=:Materiado, Usuariodoc=:$Usuariodo, Passworddoc=:$Passworddo, Perfil=:$Perfildo, Estadodoc=:$Estadodo  WHERE id_docente=$Id");
 
 			$statement=bindParam(':Id',$Id);
 			$statement->bindParam(":Nombredo", $Nombredo); 	
 			$statement->bindParam(":Apellidodo", $Apellidodo); 	
 			$statement->bindParam(":Documentodo", $Documentodo); 	
 			$statement->bindParam(":Correodo", $Correodo); 	
-			$statement->bindParam(":Materiado", $Materiado); 	
-			$statement->bindParam(":Notas", $Notas);
+			$statement->bindParam(":Materiado", $Materiado);
+			$statement->bindParam(":Usuariodo", $Usuariodo);
+			$statement->bindParam(":Passworddo", $Passworddo);
+			$statement->bindParam(":Perfildo", $Perfildo);
+			$statement->bindParam(":Estadodo", $Estadodo);
 
 				if ($statement->execute()) {
 						
@@ -86,7 +92,7 @@
 			}else{
 
 				echo "el docente no se puede eliminar";
-				header('Location: ../pages/eliminar.php')
+				header('Location: ../pages/eliminar.php');
 			}
 
 		}
