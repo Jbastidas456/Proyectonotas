@@ -10,7 +10,7 @@ Class Administrador extends Conexion
 
 	public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Pefilad,$Estadoad)
 	{
-		$statement=$this->db->prepare("INSERT INTO usuarios(Nombre,Apellido,Usuario,Password,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:Perfilad,:Estadoad)");
+		$statement= $this->db->prepare("INSERT INTO usuarios(Nombre,Apellido,Usuario,Password,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:Pefilad,:Estadoad)");
 
 		$statement->bindParam(':Nombread',$Nombread);
 		$statement->bindParam(':Apellidoad',$Apellidoad);
@@ -21,11 +21,11 @@ Class Administrador extends Conexion
 
 		if ($statement->execute()) {
 			echo "usuario registrado";
-			header('location: ../pages/index.php');
+			header('Location: ../pages/index.php');
 
 		}else{
 			echo "no se puede crear el registro";
-			header('location: ../pages/agregar.php');
+			header('Location: ../pages/agregar.php');
 		}
 
 	}
@@ -35,7 +35,7 @@ Class Administrador extends Conexion
 		$row = null;
 		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Adiministrador'"); 
 		$statement->execute();
-		while ($resul=$statement->fetch()) 
+		while ($resul = $statement->fetch()) 
 		{
 			$row[]=$resul;
 		}
@@ -45,7 +45,7 @@ Class Administrador extends Conexion
 	public function getidad($id)
 	{
 		$row=null;
-		$statement=$this-->db->prepare("SELECT * FROM usuarios WHERE Perfil='Adiministrador'and ID_USUARIO=$id"); 
+		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Adiministrador'and ID_USUARIO=:Id"); 
 		$statement->bindParam(':id',$id); 
 		$statement->execute();
 		while($resul = $statement->fetch())
@@ -57,7 +57,7 @@ Class Administrador extends Conexion
 	}
 	public function updatead($id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad)
 	{
-		$statement=$this->db->prepare("UPDATE usuario SET Nombre=:Nombread,Apellido=:Apellidoad,Usuario=:Usuarioad,Password=:Passwordad,Estado=:Estadoad WHERE ID_USUARIO=$id");
+		$statement=$this->db->prepare("UPDATE usuario SET Nombre=:Nombread,Apellido= :Apellidoad,Usuario= :Usuarioad,Password= :Passwordad,Estado= :Estadoad WHERE ID_USUARIO = $id");
 
 		$statement->bindParam(':id',$id); 
 		$statement->bindParam(":Nombread",$Nombread);
@@ -65,7 +65,16 @@ Class Administrador extends Conexion
 		$statement->bindParam(":Usuarioad",$Usuarioad);
 		$statement->bindParam(":Passwordad",$Passwordad);
 		$statement->bindParam(":Pefilad",$Pefilad);
-		$statement->bindParam(":Estadoad",$Estadoad);
+		$statement->bindParam(":Estadoad",$Estadoad); 
+		if ($statement->execute()) {
+			echo "Usuario registrado";
+			header('location: ../pages/index.php');
+
+		}else{
+			echo "Usuario  no registrado";
+			header('location: ../pages/agregar.php');
+
+		}
 	}
 
 	public function delete($id)

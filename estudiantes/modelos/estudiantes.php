@@ -1,6 +1,6 @@
 <?php
 
-include_once('../../Conexion');
+include_once('../../Conexion.php');
 
 Class Estudiante extends Conexion
 {
@@ -9,9 +9,9 @@ Class Estudiante extends Conexion
 		$this->db = parent::__construct();
 	}
 
-	publi function agregarad($Nombrees,$Apellidoades,$Documentoes,$Correoes,$Materia,$Docentees,$Promedio,$FECHA_REGISTRO)
+	public function agregarad($Nombrees,$Apellidoades,$Documentoes,$Correoes,$Materia,$Docentees,$Promedio,$FECHA_REGISTRO)
 	{
-		$statement=$this->db->prepare("INSERT INTO estudiantes(Nombre,Apellido,Documento,Correo,Materia,Docente,Promedio,FECHA_REGISTRO)values(:Nombrees,:Apellidoades,:Documentoes,:Correoes,:Materia,:Docente,:Promedio,:FECHA_REGISTRO,:'Estudiante',:'Activo')");
+		$statement=$this->db->prepare("INSERT INTO estudiantes(Nombre,Apellido,Documento,Correo,Materia,Docente,Promedio,FECHA_REGISTRO)values(:Nombrees,:Apellidoades,:Documentoes,:Correoes,:Materia,:Docentees,:Promedio,:FECHA_REGISTRO)");
 
 		$statement->bindParam(":Nombrees",$Nombrees);
 		$statement->bindParam(":Apellidoades",$Apellidoades);
@@ -24,11 +24,11 @@ Class Estudiante extends Conexion
 
 		if ($statement->execute()) {
 			echo "Estudiante registrado";
-			header('location:../index.php')
+			header('location:../controladores/agregarestudiantes.php');
 
 		}else{
 			echo "no se puede registrar el Estudiante";
-			header('location: ../pages/agregar.php')
+			header('location: ../pages/agregar.php');
 		}
 
 	}
@@ -47,8 +47,8 @@ Class Estudiante extends Conexion
 
 	public function getides($id)
 	{
-		$row=null
-		$statement=$this-->db->prepare("SELECT * FROM estudiantes WHERE Documentoes='Estudiante'and ID_ESTUDIANTE=$id"); 
+		$row=null;
+		$statement=$this->db->prepare("SELECT * FROM estudiantes WHERE Documentoes='Estudiante'and ID_ESTUDIANTE=$id"); 
 		$statement->bindParam(':id',$id); 
 		$statement->execute();
 		while($resul = $statement->fetch())
@@ -69,7 +69,7 @@ Class Estudiante extends Conexion
 		$statement->bindParam(":Materia",$Materia);
 		$statement->bindParam(":Docentees",$Docentees);
 		$statement->bindParam(":Promedio",$Promedio);
-		$statement->bindParam(":FECHA_REGISTRO",$FECHA_REGISTRO
+		$statement->bindParam(":FECHA_REGISTRO",$FECHA_REGISTRO);
 	}
 
 	public function delete($id)
