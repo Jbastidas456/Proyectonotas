@@ -9,6 +9,22 @@
 
 		public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad){
 
+			$sql1 = "SELECT * FROM usuarios WHERE Usuario = 'Usuarioad'";
+
+			$Resultado=$this->db->query($sql1);
+
+			if($Resultado->rowCount() > 0){
+
+
+				echo "<script>
+
+					alert('El usuario ya esta registrado');
+					window.location = '../pages/agregar.php';
+
+				</script>";
+			}else{
+
+
 			$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread, :Apellidoad, :Usuarioad, :Passwordad, :Perfilad, :Estadoad )");
 
 				$statement->bindParam(":Nombread", $Nombread); 	
@@ -24,7 +40,7 @@
 						echo "no se puede realizar el registro";
 						header('Location: ../pages/agregar.php');
 				}
-
+			}
 
 		}
 
@@ -41,23 +57,20 @@
 		}
 
 		public function getidad($Id){
-			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM usuarios WHERE Perfil=Administrador AND id_usuario=$Id");
+			
+			$statement = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario= :Id");
 			$statement->bindparam(':Id',$Id);
 			$statement->execute();
 			
-			while ($resul = $statement->fetch()) {
-				
-				$row[]=$resul;
-			}
-			return $row;
+			$resultado = $statement->fetch(PDO::FETCH_ASSOC); 
+			return $resultado;
 		}
 
 		public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad){
 
 			$statement=$this->db->prepare("UPDATE * FROM usuarios SET Nombreusu=:Nombread,Apellidousu=:Apellidoad,Usuario=:Usuarioad, Passwordusu=:Passwordad, Estado=:Estadoad WHERE id_usuario=$Id");
 
-			$statement=bindParam(':Id',$Id);
+			$statement->bindParam(':Id',$Id);
 			$statement->bindParam(":Nombread", $Nombread); 	
 			$statement->bindParam(":Apellidoad", $Apellidoad); 	
 			$statement->bindParam(":Usuarioad", $Usuarioad); 	
