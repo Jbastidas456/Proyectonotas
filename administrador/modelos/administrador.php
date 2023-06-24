@@ -10,6 +10,20 @@ Class Administrador extends Conexion
 
 	public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Pefilad,$Estadoad)
 	{
+
+
+
+
+		$sql1 = "SELECT * FROM usuarios WHERE Usuario='Usuarioad'";
+		$resultado=$this->db->query($sql1); 
+		if($resultado->rowCount() > 0){
+			echo "<script>
+			alert('El usuario ya esta registrado');window.location='../pages/agregar.php';</script>";
+
+
+		}else
+		{
+
 		$statement= $this->db->prepare("INSERT INTO usuarios(Nombre,Apellido,Usuario,Password,Perfil,Estado)values(:Nombread,:Apellidoad,:Usuarioad,:Passwordad,:Pefilad,:Estadoad)");
 
 		$statement->bindParam(':Nombread',$Nombread);
@@ -29,30 +43,39 @@ Class Administrador extends Conexion
 		}
 
 	}
+}
 
 	public function getad()
 	{
-		$row = null;
-		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Adiministrador'"); 
+		/*$row = null;
+		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Administrador'"); 
 		$statement->execute();
 		while ($resul = $statement->fetch()) 
 		{
 			$row[]=$resul;
 		}
-		return $row;
+		return $row;*/
+
+		$sql="SELECT * FROM usuarios WHERE Perfil='administrador'";
+		$resultado=$this->db->query($sql);
+		if ($resultado->rowCount()>0) {
+			while ($resul=$resultado->fetch()) {
+				$result[]=$resul;
+			}
+		}
+		return $result;
 	}
 
-	public function getidad($id)
+	public function getidad($Id)
 	{
-		$row=null;
-		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Adiministrador'and ID_USUARIO=:Id"); 
-		$statement->bindParam(':id',$id); 
+		
+		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil= ID_USUARIO=:Id"); 
+		$statement->bindParam(':Id',$Id); 
 		$statement->execute();
-		while($resul = $statement->fetch())
-		{
-			$row=$resul;
-		}
-		return $row;
+		
+			$resultado = $statement->fetch(PDO::FETCH_ASSOC);
+
+		return $resultado;
 
 	}
 	public function updatead($id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad)
