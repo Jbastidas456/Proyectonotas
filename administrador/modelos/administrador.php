@@ -69,7 +69,7 @@ Class Administrador extends Conexion
 	public function getidad($Id)
 	{
 		
-		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil= ID_USUARIO=:Id"); 
+		$statement=$this->db->prepare("SELECT * FROM usuarios WHERE ID_USUARIO=:Id"); 
 		$statement->bindParam(':Id',$Id); 
 		$statement->execute();
 		
@@ -78,11 +78,11 @@ Class Administrador extends Conexion
 		return $resultado;
 
 	}
-	public function updatead($id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad)
+	public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Pefilad,$Estadoad)
 	{
-		$statement=$this->db->prepare("UPDATE usuario SET Nombre=:Nombread,Apellido= :Apellidoad,Usuario= :Usuarioad,Password= :Passwordad,Estado= :Estadoad WHERE ID_USUARIO = $id");
+		$statement=$this->db->prepare("UPDATE usuario SET ID_USUARIO=:Id Nombre=:Nombread,Apellido= :Apellidoad,Usuario= :Usuarioad,Password= :Passwordad,Estado= :Estadoad WHERE ID_USUARIO = $Id");
 
-		$statement->bindParam(':id',$id); 
+		$statement->bindParam(':Id',$Id); 
 		$statement->bindParam(":Nombread",$Nombread);
 		$statement->bindParam(":Apellidoad",$Apellidoad);
 		$statement->bindParam(":Usuarioad",$Usuarioad);
@@ -100,11 +100,11 @@ Class Administrador extends Conexion
 		}
 	}
 
-	public function delete($id)
+	public function delete($Id)
 
 	{
-		$statement=$this->db->prepare("DELETE * FROM usuarios WHERE ID_USUARIO=id");
-		$statement=bindParam(':id',$id);
+		$statement=$this->db->prepare("DELETE * FROM usuarios WHERE ID_USUARIO=Id");
+		$statement=bindParam(':Id',$Id);
 		if($statement->execute())
 		{
 			echo "usuario eliminado";
@@ -114,6 +114,7 @@ Class Administrador extends Conexion
 			header('location: ../pages/eliminar.php');
 		}
 	}
+	
 
 }
 ?>

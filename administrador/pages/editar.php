@@ -7,24 +7,21 @@
 </head>
 <body> 
 
-
-
 	<?php
 
-	include_once('../../Conexion.php');
-	include_once('../modelos/administrador.php');
+
+	require_once('../../Conexion.php');
+	require_once('../modelos/administrador.php');
+
 
 	$Id = $_GET['Id'];
 	$admin = new Administrador(); 
 	$row=$admin->getidad($Id);
 	if ($row) {
 		
-	
-
-
-
+		
 	?>
-	<form  action="../controladores/editar.php" method="POST">
+	<form  action="../controladores/editarusuario.php" method="POST">
 		<input type="hidden" name="Id" value="<?php echo $Id?>">
 	<div class="content">
 <label>Nombre</label>
@@ -103,6 +100,7 @@ button{
 
 
 </style>
+
 
 </body>
 </html>

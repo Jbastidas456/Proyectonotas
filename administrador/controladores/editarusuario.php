@@ -2,18 +2,21 @@
     require_once('../../Conexion.php');
     require_once('../modelos/administrador.php');
 
-    $admin = new Administrador();
+    $admin = new Administrador(); 
+    if ($_POST) {
+    	
+   
 
     $Id = $_POST['Id'];
-    $Nombreusu = $_POST['Nombre'];
-    $Apellidousu = $_POST['apellido'];
+    $Nombre = $_POST['Nombre'];
+    $Apellido = $_POST['apellido'];
     $Usuario = $_POST['usuario'];
-    $Passwordusu = $_POST['contraseña'];
-    $Perfil = $_POST['Perfil'];
+    $Password = $_POST['contraseña'];
+    $Perfil = $_POST['txtPerfil'];
     $Estado = $_POST['Estado'];
 
     $admin->updatead($Id,$Nombre,$Apellido,$Usuario,$Password,$Perfil,$Estado);
 
-
+ }
 
  ?>

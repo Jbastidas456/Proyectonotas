@@ -36,7 +36,7 @@ Class Estudiante extends Conexion
 	public function getes()
 	{
 		$row = null;
-		$statement=$this->db->prepare("SELECT * FROM estudiantes WHERE Perfil='Estudiante'"); 
+		$statement=$this->db->prepare("SELECT * FROM estudiantes "); 
 		$statement->execute();
 		while ($resul=$statement->fetch()) 
 		{
@@ -45,11 +45,11 @@ Class Estudiante extends Conexion
 		return $row;
 	}
 
-	public function getides($id)
+	public function getides($Id)
 	{
 		$row=null;
-		$statement=$this->db->prepare("SELECT * FROM estudiantes WHERE Documentoes='Estudiante'and ID_ESTUDIANTE=$id"); 
-		$statement->bindParam(':id',$id); 
+		$statement=$this->db->prepare("SELECT * FROM estudiantes WHERE Documentoes='Estudiante'and ID_ESTUDIANTE=$Id"); 
+		$statement->bindParam(':Id',$Id); 
 		$statement->execute();
 		while($resul = $statement->fetch())
 		{
@@ -60,7 +60,7 @@ Class Estudiante extends Conexion
 	}
 	public function updatead($Nombrees,$Apellidoades,$Documentoes,$Correoes,$Materia,$Docentees,$Promedio,$FECHA_REGISTRO)
 	{
-		$statement=$this->db->prepare("UPDATE estudiantes SET Nombre=:Nombrees,Apellido=:Apellidoes,Documento=:Documentoes,Correo=:Correoes,Materia=:Materia WHERE ID_ESTUDIANTE=$id");
+		$statement=$this->db->prepare("UPDATE estudiantes SET Nombre=:Nombrees,Apellido=:Apellidoes,Documento=:Documentoes,Correo=:Correoes,Materia=:Materia WHERE ID_ESTUDIANTE=$Id");
 
 		$statement->bindParam(":Nombrees",$Nombrees);
 		$statement->bindParam(":Apellidoades",$Apellidoades);
@@ -72,11 +72,11 @@ Class Estudiante extends Conexion
 		$statement->bindParam(":FECHA_REGISTRO",$FECHA_REGISTRO);
 	}
 
-	public function delete($id)
+	public function delete($Id)
 
 	{
-		$statement=$this->db->prepare("DELETE * FROM Documento WHERE ID_ESTUDIANTE=id");
-		$statement=bindParam(':id',$id);
+		$statement=$this->db->prepare("DELETE * FROM Documento WHERE ID_ESTUDIANTE=Id");
+		$statement=bindParam(':Id',$Id);
 		if($statement->execute())
 		{
 			echo "Estudiante eliminado";
