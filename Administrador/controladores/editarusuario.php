@@ -12,7 +12,7 @@
 	$Nombreusu = $_POST['Nombre'];
 	$Apellidousu = $_POST['apellido'];
 	$Usuario = $_POST['usuario'];
-	$Passwordusu = $_POST['contraseña'];
+	$Passwordusu = $_POST['contrasena'];
 	$Perfil = $_POST['Perfil'];
 	$Estado = $_POST['Estado'];
 

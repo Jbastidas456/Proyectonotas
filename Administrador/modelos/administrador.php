@@ -9,21 +9,17 @@
 
 		public function agregarad($Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad){
 
-			$sql1 = "SELECT * FROM usuarios WHERE Usuario = 'Usuarioad'";
+		
+        $sql = "SELECT * FROM usuarios WHERE Usuario='$Usuarioad'";
+        $result = $this->db->query($sql);
+        if($result->rowCount() > 0){
 
-			$Resultado=$this->db->query($sql1);
+        	echo "<script>
+          alert('El usuario ya esta registrado');
+          window.location = '../pages/agregar.php';
+      </script>";   
 
-			if($Resultado->rowCount() > 0){
-
-
-				echo "<script>
-
-					alert('El usuario ya esta registrado');
-					window.location = '../pages/agregar.php';
-
-				</script>";
-			}else{
-
+        }else{
 
 			$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombread, :Apellidoad, :Usuarioad, :Passwordad, :Perfilad, :Estadoad )");
 
@@ -66,9 +62,9 @@
 			return $resultado;
 		}
 
-		public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Estadoad){
+		public function updatead($Id,$Nombread,$Apellidoad,$Usuarioad,$Passwordad,$Perfilad,$Estadoad){
 
-			$statement=$this->db->prepare("UPDATE * FROM usuarios SET Nombreusu=:Nombread,Apellidousu=:Apellidoad,Usuario=:Usuarioad, Passwordusu=:Passwordad, Estado=:Estadoad WHERE id_usuario=$Id");
+			$statement=$this->db->prepare("UPDATE usuarios SET id_usuario=:Id,Nombreusu=:Nombread,Apellidousu=:Apellidoad,Usuario=:Usuarioad,Passwordusu=:Passwordad,Perfil=:Perfilad,Estado=:Estadoad WHERE id_usuario=$Id");
 
 			$statement->bindParam(':Id',$Id);
 			$statement->bindParam(":Nombread", $Nombread); 	
