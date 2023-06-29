@@ -86,16 +86,15 @@
 
 
 		public function deletead($Id){
-
-			$statement=$this->db->prepare("DELETE * FROM usuarios WHERE id_usuario=$Id");
-			$statement->bindParam(':Id',$Id);
-			if ($statement->execute()) {
-				echo "usuario eliminado";
-				header('Location: ../pages/index.php');
+				$statement=$this->db->prepare("DELETE FROM usuarios WHERE id_usuario=:Id");
+				$statement->bindParam(':Id', $Id);
+				if($statement->execute()){
+				print "<script>alert('Usuario eliminado');
+				window.location='../pages/index.php';</script>";
 			}else{
 
-				echo "el usuario no se puede eliminar";
-				header('Location: ../pages/eliminar.php');
+					print "<script>alert('Usuario no se puede eliminar');
+				window.location='../pages/eliminar.php';</script>";
 			}
 
 		}

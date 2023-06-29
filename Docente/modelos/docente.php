@@ -9,6 +9,17 @@
 
 		public function agregarad($Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo){
 
+			 $sql = "SELECT * FROM docentes WHERE Usuariodoc='$Usuariodo'";
+        $result = $this->db->query($sql);
+        if($result->rowCount() > 0){
+
+        	echo "<script>
+          alert('El docente ya esta registrado');
+          window.location = '../pages/agregar.php';
+      </script>";   
+
+        }else{
+
 				$statement = $this->db->prepare("INSERT INTO docentes(Nombredoc,Apellidodoc,Documentodoc,Correodoc,Materiadoc,Usuariodoc, Passworddoc,Perfil,Estadodoc)values(:Nombredo, :Apellidodo, :Documentodo, :Correodo, :Materiado, :Usuariodo, :Passworddo, :Perfildo, :Estadodo)");
 
 				$statement->bindParam(":Nombredo", $Nombredo); 	
@@ -28,7 +39,7 @@
 						header('Location: ../pages/agregar.php');
 				}
 
-
+			}
 		}
 
 		public function getad(){
@@ -44,23 +55,19 @@
 		}
 
 		public function getidad($Id){
-			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM docentes WHERE Perfil=Docente AND id_docente=$Id");
+			$statement = $this->db->prepare("SELECT * FROM docentes WHERE id_docente= :Id");
 			$statement->bindparam(':Id',$Id);
 			$statement->execute();
 			
-			while ($resul = $statement->fetch()) {
-				
-				$row[]=$resul;
-			}
-			return $row;
+			$resultado = $statement->fetch(PDO::FETCH_ASSOC); 
+			return $resultado;
 		}
 
-		public function updatead($Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo){
+		public function updatead($Id,$Nombredo,$Apellidodo,$Documentodo,$Correodo,$Materiado,$Usuariodo,$Passworddo,$Perfildo,$Estadodo){
 
-			$statement=$this->db->prepare("UPDATE * FROM docentes SET Nombredoc=:Nombredo,Apellidodoc=:Apellidodo,Documentodo=:Documentodoc, Correodoc=:Correodo, Materiadoc=:Materiado, Usuariodoc=:$Usuariodo, Passworddoc=:$Passworddo, Perfil=:$Perfildo, Estadodoc=:$Estadodo  WHERE id_docente=$Id");
+			$statement=$this->db->prepare("UPDATE docentes SET id_docente=:Id,Nombredoc=:Nombredo,Apellidodoc=:Apellidodo,Documentodoc=:Documentodo,Correodoc=:Correodo,Materiadoc=:Materiado,Usuariodoc=:Usuariodo,Passworddoc=:Passworddo,Perfil=:Perfildo,Estadodoc=:Estadodo WHERE id_docente=$Id");
 
-			$statement=bindParam(':Id',$Id);
+			$statement->bindParam(':Id',$Id);
 			$statement->bindParam(":Nombredo", $Nombredo); 	
 			$statement->bindParam(":Apellidodo", $Apellidodo); 	
 			$statement->bindParam(":Documentodo", $Documentodo); 	

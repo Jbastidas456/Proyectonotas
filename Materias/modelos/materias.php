@@ -9,6 +9,18 @@
 
 		public function agregarad($Nombrema){
 
+
+
+        $sql = "SELECT * FROM materias WHERE Nombremate='$Nombrema'";
+        $result = $this->db->query($sql);
+        if($result->rowCount() > 0){
+
+        	echo "<script>
+          alert('la materia ya esta registrada');
+          window.location = '../pages/agregar.php';
+      </script>";   
+
+        }else{
 			$statement = $this->db->prepare("INSERT INTO materias(Nombremate)values(:Nombrema)");
 
 				$statement->bindParam(":Nombrema", $Nombrema); 	
@@ -24,6 +36,8 @@
 
 		}
 
+	}
+
 		public function getad(){
 			$row = null;
 			$statement = $this->db->prepare("SELECT * FROM materias");
@@ -37,25 +51,21 @@
 		}
 
 		public function getidad($Id){
-			$row = null;
-			$statement = $this->db->prepare("SELECT * FROM materias WHERE id_materia=$Id");
+
+			$statement = $this->db->prepare("SELECT * FROM materias WHERE id_materia= :Id");
 			$statement->bindparam(':Id',$Id);
 			$statement->execute();
 			
-			while ($resul = $statement->fetch()) {
-				
-				$row[]=$resul;
-			}
-			return $row;
+			$resultado = $statement->fetch(PDO::FETCH_ASSOC); 
+			return $resultado;
 		}
 
-		public function updatead($Id,$Nombrema){
+		public function updatead($Id,$Nombread){
 
-			$statement=$this->db->prepare("UPDATE * FROM materias SET Nombremate=:Nombrema WHERE id_materia=$Id");
+			$statement=$this->db->prepare("UPDATE materias SET id_materia=:Id,Nombremate=:Nombread WHERE id_materia=$Id");
 
-			$statement=bindParam(':Id',$Id);
-			$statement->bindParam(":Nombrema", $Nombrema); 	
-			
+			$statement->bindParam(':Id',$Id);
+			$statement->bindParam(":Nombread", $Nombread); 	
 
 				if ($statement->execute()) {
 						

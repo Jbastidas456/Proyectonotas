@@ -49,12 +49,12 @@
 		<div class="form-group">
 			<p>Perfil</p>
 
-				<label for="Perfi"></label>
+				<label for="Perfil"></label>
 				<select class="form-select" name="Perfildocente">
 
 				<option selected>Elegir opcion</option>
-				<option value="administrador">Maestros</option>
-				<option value="docentes">administrador</option>
+				<option value="docente">docente</option>
+				<option value="administrador">administrador</option>
 
 			</select>
 		</div>
