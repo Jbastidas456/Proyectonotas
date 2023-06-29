@@ -30,7 +30,7 @@
 <input type="number" name="pro">
 <hr>
 <label>FECHA_REGISTRO</label>
-<input type="text" name="fech">
+<input type="date" name="fech">
 <hr>
 <div class="form-group">
 

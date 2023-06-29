@@ -19,45 +19,48 @@
 		
 		
 	?>
-	<form  action="../pages/editar.php" method="POST">
+	<form  action="../controladores/editarestudiante.php" method="POST">
 		<input type="hidden" name="Id" value="<?php echo $Id?>">
 	<div class="content">
+		
 <label>Nombre</label>
 <input type="text"  name="nom" value="<?php echo $row['Nombre']?>">
 <hr>
+
 <label>Apellido</label>
 <input type="text" name="ape" value="<?php echo $row['Apellido']?>">
 <hr>
+
 <label>Documento</label>
 <input type="text"  name="docu"  value="<?php echo $row['Documento']?>">
 <hr>
+
 <label>Correo</label>
 <input type="number" name="co"  value="<?php echo $row['Correo']?>">
 <hr>
+
 <div class="form-group">
   <label>Materia</label>
   <input type="text" name="mate" value="<?php echo $row['Materia']?>">
-
+<hr>
   <label>Docente</label>
   <input type="text" name="docen"value="<?php echo $row['Docente']?>">
-
+<hr>
 
   <label>Promedio</label>
   <input type="text" name="pro"value="<?php echo $row['Promedio']?>">
 
-
+<hr>
   <label>FECHA_REGISTRO</label>
   <input type="text" name="fech" value="<?php echo $row['FECHA_REGISTRO']?>">
               
-        </div>
-<hr>
-        </div>
-<hr>
+        </div>        </div>
+
 
 
 <button type="submit">Actualizar</button>
 
-</div>
+
 
 </form>
 
@@ -77,18 +80,18 @@ text-align: center;
 .content
 {
 
-	 color: darkmagenta;;
+	 color: darkmagenta;
 	border: solid;
 	text-align: center; 
 	border-color: black;
 
 } 
 form{
-	background-color:beige  ;
+	background-color:beige;
 }
 button{
 	color: darkmagenta;
-	background:grey ;
+	background:grey;
 }
 
 

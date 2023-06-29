@@ -24,7 +24,7 @@ Class Estudiante extends Conexion
 
 		if ($statement->execute()) {
 			echo "Estudiante registrado";
-			header('location:../controladores/agregarestudiantes.php');
+			header('location:../pages/index.php');
 
 		}else{
 			echo "no se puede registrar el Estudiante";
@@ -47,7 +47,7 @@ Class Estudiante extends Conexion
 
 	public function getides($Id)
 	{
-		$row=null;
+		/*$row=null;
 		$statement=$this->db->prepare("SELECT * FROM estudiantes WHERE Documentoes='Estudiante'and ID_ESTUDIANTE=$Id"); 
 		$statement->bindParam(':Id',$Id); 
 		$statement->execute();
@@ -55,7 +55,18 @@ Class Estudiante extends Conexion
 		{
 			$row=$resul;
 		}
-		return $row;
+		return $row;*/
+
+
+
+		$sql="SELECT * FROM estudiantes WHERE ID_ESTUDIANTE=$Id ";
+		$resultado=$this->db->query($sql);
+		if ($resultado->rowCount()>0) {
+			while ($resul=$resultado->fetch()) {
+				$result[]=$resul;
+			}
+		}
+		return $result;
 
 	}
 	public function updatead($Nombrees,$Apellidoades,$Documentoes,$Correoes,$Materia,$Docentees,$Promedio,$FECHA_REGISTRO)

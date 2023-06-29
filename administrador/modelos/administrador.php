@@ -103,15 +103,13 @@ Class Administrador extends Conexion
 	public function delete($Id)
 
 	{
-		$statement=$this->db->prepare("DELETE * FROM usuarios WHERE ID_USUARIO=Id");
+		$statement=$this->db->prepare("DELETE  FROM usuarios WHERE ID_USUARIO=:Id");
 		$statement=bindParam(':Id',$Id);
 		if($statement->execute())
 		{
-			echo "usuario eliminado";
-			header('location: ../pages/index.php');
+			print "<script>alert('usuario eliminado');window.location='../pages/index.php';</script>";
 		}else{
-			echo "el usuario no se puede eliminar";
-			header('location: ../pages/eliminar.php');
+				print "<script>alert('usuario no eliminado');window.location='../pages/index.php';</script>";
 		}
 	}
 	
