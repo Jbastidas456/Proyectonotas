@@ -91,15 +91,15 @@
 
 		public function deletead($Id){
 
-			$statement=$this->db->prepare("DELETE * FROM docentes WHERE id_docente=$Id");
+			$statement=$this->db->prepare("DELETE FROM docentes WHERE id_docente=:Id");
 			$statement->bindParam(':Id',$Id);
 			if ($statement->execute()) {
-				echo "docente eliminado";
-				header('Location: ../pages/index.php');
+				print "<script>alert('dcoente eliminada');
+				window.location='../pages/index.php';</script>";
 			}else{
 
-				echo "el docente no se puede eliminar";
-				header('Location: ../pages/eliminar.php');
+			print "<script>alert(' no se puede eliminar');
+				window.location='../pages/eliminar.php';</script>";
 			}
 
 		}

@@ -80,15 +80,15 @@
 
 		public function deletead($Id){
 
-			$statement=$this->db->prepare("DELETE * FROM materias WHERE id_materia=$Id");
+			$statement=$this->db->prepare("DELETE FROM materias WHERE id_materia=:Id");
 			$statement->bindParam(':Id',$Id);
 			if ($statement->execute()) {
-				echo "materia eliminada";
-				header('Location: ../pages/index.php');
+				print "<script>alert('Materia eliminada');
+				window.location='../pages/index.php';</script>";
 			}else{
 
-				echo "no se puede eliminar";
-				header('Location: ../pages/eliminar.php');
+				print "<script>alert(' no se puede eliminar');
+				window.location='../pages/eliminar.php';</script>";
 			}
 
 		}
